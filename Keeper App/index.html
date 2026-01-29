@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keeper App</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main class="app">
+    <header class="header">
+      <h1>Keeper</h1>
+      <p>Your calm space for thoughts</p>
+    <button id="themeToggle" class="theme-btn">🌙 Dark<button>
+    </header>
+
+    <input
+      type="text"
+      id="searchInput"
+      class="search"
+      placeholder="Search notes..."
+    />
+
+    <section class="note-form">
+      <input type="text" id="titleInput" placeholder="Title" />
+      <textarea id="contentInput" placeholder="Write your note..."></textarea>
+      <button id="addBtn">Add Note</button>
+    </section>
+
+    <section id="notesContainer" class="notes"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
