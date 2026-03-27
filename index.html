@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendWise - NextGen Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="theme-cyber">
+    <div class="bg-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <button id="theme-toggle" class="theme-btn cyber-btn-icon" title="Change Core Theme">
+            <i class="fas fa-microchip"></i>
+        </button>
+        <div class="theme-options glass-panel">
+            <button class="theme-option cyber-btn-sm" data-theme="cyber">Cyber</button>
+            <button class="theme-option cyber-btn-sm" data-theme="neon">Neon</button>
+            <button class="theme-option cyber-btn-sm" data-theme="matrix">Matrix</button>
+            <button class="theme-option cyber-btn-sm" data-theme="void">Void</button>
+            <button class="theme-option cyber-btn-sm" data-theme="quantum">Quantum</button>
+        </div>
+    </div>
+
+    <div class="container main-layout">
+        <header class="cyber-header glass-panel">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-fingerprint neon-text"></i>
+                    <h1 class="glitch" data-text="SpendWise">SpendWise</h1>
+                </div>
+                <p class="tagline typewriter">Track your expenses. Master your future.</p>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Input -->
+            <div class="left-panel">
+                <div class="card glass-panel cyber-card input-card">
+                    <div class="card-header cyber-heading">
+                        <h2><i class="fas fa-terminal"></i> INIT_ENTRY</h2>
+                        <div class="scanner-line"></div>
+                    </div>
+                    
+                    <form id="expense-form" class="cyber-form">
+                        <div class="form-group">
+                            <label for="expense-name"><i class="fas fa-tag"></i> Designation</label>
+                            <input type="text" id="expense-name" class="cyber-input" placeholder="e.g., Groceries, Fuel" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expense-amount"><i class="fas fa-rupee-sign"></i> Credits</label>
+                            <div class="currency-input">
+                                <span class="currency-symbol">₹</span>
+                                <input type="number" id="expense-amount" class="cyber-input" placeholder="0" min="1" step="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row-group">
+                            <div class="col">
+                                <label for="expense-category"><i class="fas fa-folder-tree"></i> Sector</label>
+                                <select id="expense-category" class="cyber-select" required>
+                                    <option value="" disabled selected>Select Sector</option>
+                                    <option value="Food">Food & Dining</option>
+                                    <option value="Transport">Transportation</option>
+                                    <option value="Shopping">Shopping</option>
+                                    <option value="Bills">Bills & Utilities</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Health">Health & Medical</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Travel">Travel</option>
+                                    <option value="Home">Home & Rent</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="expense-date"><i class="fas fa-clock"></i> Timestamp</label>
+                                <input type="date" id="expense-date" class="cyber-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="expense-notes"><i class="fas fa-database"></i> Metadata</label>
+                            <textarea id="expense-notes" class="cyber-input cyber-textarea" rows="2" placeholder="Input additional parameters..."></textarea>
+                        </div>
+
+                        <div class="button-group cyber-actions">
+                            <button type="submit" class="cyber-btn primary">
+                                <span class="btn-text"><i class="fas fa-upload"></i> TRANSMIT</span>
+                                <div class="btn-glitch"></div>
+                            </button>
+                            <button type="button" class="cyber-btn secondary" id="clear-btn">
+                                <span class="btn-text"><i class="fas fa-eraser"></i> PURGE</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Stats Summary Block -->
+                <div class="stats-overview">
+                    <div class="cyber-stat-card primary-stat glass-panel">
+                        <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">TOTAL ALLOCATED</span>
+                            <span class="stat-amount glow-text" id="total-expense">₹ 0</span>
+                        </div>
+                    </div>
+                    <div class="cyber-stat-card secondary-stat glass-panel">
+                        <div class="stat-icon"><i class="fas fa-network-wired"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">RECORDS</span>
+                            <span class="stat-amount" id="total-transactions">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Grid -->
+                <div class="card glass-panel cyber-card stats-card">
+                    <div class="card-header cyber-heading-small">
+                        <h3><i class="fas fa-satellite-dish"></i> TELEMETRY</h3>
+                    </div>
+                    <div class="cyber-stats-grid">
+                        <div class="grid-stat glass-panel-inner">
+                            <span class="label">24H CYCLE</span>
+                            <span class="value text-cyan" id="today-expense">₹ 0</span>
+                        </div>
+                        <div class="grid-stat glass-panel-inner">
+                            <span class="label">7D CYCLE</span>
+                            <span class="value text-magenta" id="week-expense">₹ 0</span>
+                        </div>
+                        <div class="grid-stat glass-panel-inner">
+                            <span class="label">AVG / SOLAR DAY</span>
+                            <span class="value text-purple" id="avg-expense">₹ 0</span>
+                        </div>
+                        <div class="grid-stat glass-panel-inner">
+                            <span class="label">PRIME SECTOR</span>
+                            <span class="value text-yellow" id="top-category">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Data & Analytics -->
+            <div class="right-panel">
+                <div class="data-view glass-panel cyber-card history-card">
+                    <div class="data-header">
+                        <div class="cyber-heading">
+                            <h2><i class="fas fa-list-ul"></i> DATABANKS</h2>
+                            <div class="scanner-line"></div>
+                        </div>
+                        <div class="data-controls">
+                            <div class="cyber-select-wrapper">
+                                <select id="category-filter" class="cyber-select small">
+                                    <option value="all">Global View</option>
+                                    <option value="Food">Sector: Food</option>
+                                    <option value="Transport">Sector: Transport</option>
+                                    <option value="Shopping">Sector: Shopping</option>
+                                    <option value="Bills">Sector: Bills</option>
+                                    <option value="Entertainment">Sector: Entertainment</option>
+                                    <option value="Health">Sector: Health</option>
+                                    <option value="Education">Sector: Education</option>
+                                    <option value="Travel">Sector: Travel</option>
+                                    <option value="Home">Sector: Home</option>
+                                    <option value="Other">Sector: Other</option>
+                                </select>
+                            </div>
+                            <button class="cyber-btn danger small" id="delete-all">
+                                <span class="btn-text"><i class="fas fa-biohazard"></i> WIPE</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="expenses-list cyber-scrollbar" id="expenses-list">
+                        <!-- Populated by JS -->
+                        <div class="empty-state cyber-empty">
+                            <div class="hologram-effect">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                            <h3>NO SIGNAL</h3>
+                            <p>Awaiting data transmission...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown -->
+                <div class="analytics-view glass-panel cyber-card category-card">
+                    <div class="cyber-heading">
+                        <h2><i class="fas fa-radar"></i> SECTOR ANALYSIS</h2>
+                        <div class="scanner-line"></div>
+                    </div>
+                    <div class="category-breakdown cyber-scrollbar" id="category-breakdown">
+                        <div class="empty-state cyber-empty">
+                            <p>Insufficient telemetry for analysis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="cyber-footer glass-panel">
+            <div class="footer-info">
+                <i class="fas fa-shield-alt"></i> LOCAL DECRYPTION PROTOCOL ACTIVE
+            </div>
+            <div class="footer-actions">
+                <button class="cyber-btn-outline" id="export-btn">
+                    <i class="fas fa-download"></i> EXTRACT
+                </button>
+                <button class="cyber-btn-outline" id="import-btn">
+                    <i class="fas fa-upload"></i> INJECT
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Inject JS at the end -->
+    <script src="script.js"></script>
+</body>
+</html>
